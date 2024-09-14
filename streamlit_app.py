@@ -7,7 +7,7 @@ from quart import (Quart, redirect, url_for, session, request, jsonify, render_t
 HOST = 'real-dog-together.ngrok-free.app'
   
 app = Quart(__name__)
-app.config['SECRET_KEY'] = os.environ['FLASK_SECRET']
+# app.config['SECRET_KEY'] = os.environ['FLASK_SECRET']
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['MAX_CONTENT_LENGTH'] = 4*1024*1024*1024
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -24,5 +24,7 @@ app.permanent_session_lifetime = datetime.timedelta(days=7)
 @app.errorhandler(404)
 async def page_404(e):
   return await render_template('404Page.html')
+
+app.run(port=8501)
 
 # asgi = socketio.ASGIApp(sio, app)
